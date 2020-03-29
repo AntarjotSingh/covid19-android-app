@@ -21,7 +21,7 @@
              <TextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:id="@+id/textGrid"
+                   android:id="@+id/text_lastupdated"
                    android:text="@string/text_time_update"
                    android:layout_centerVertical="true"
                    android:paddingLeft="30dp"
@@ -63,9 +63,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/text_confirmed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="906"
+                        android:text="--"
                         android:textAlignment="center"
                         android:textColor="@color/colorRed"
                         android:layout_gravity="center"
@@ -109,9 +110,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/text_active"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="803"
+                        android:text="--"
                         android:textAlignment="center"
                         android:textColor="@color/colorBlue"
                         android:layout_gravity="center"
@@ -156,9 +158,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/text_recovered"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="83"
+                        android:text="--"
                         android:textAlignment="center"
                         android:textColor="@color/colorGreen"
                         android:layout_gravity="center"
@@ -202,9 +205,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/text_deceased"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20"
+                        android:text="--"
                         android:textAlignment="center"
                         android:textColor="@color/colorGray"
                         android:padding="20dp"

@@ -6,19 +6,27 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.coffeewithandroid.covid19app.App.AppController;
+import com.coffeewithandroid.covid19app.Util.Constants;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FiguresFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FiguresFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static com.coffeewithandroid.covid19app.App.AppController.TAG;
+
 public class FiguresFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,21 +37,16 @@ public class FiguresFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private TextView text_confirmed, text_active, text_recovered, text_deceased, text_lastupdated;
+
+    private Constants constants;
+
     private OnFragmentInteractionListener mListener;
 
     public FiguresFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FiguresFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FiguresFragment newInstance(String param1, String param2) {
         FiguresFragment fragment = new FiguresFragment();
         Bundle args = new Bundle();
@@ -66,10 +69,16 @@ public class FiguresFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_figures, container, false);
+        View layout= inflater.inflate(R.layout.fragment_figures, container, false);
+        text_confirmed = layout.findViewById(R.id.text_confirmed);
+        text_active = layout.findViewById(R.id.text_active);
+        text_recovered = layout.findViewById(R.id.text_recovered);
+        text_deceased = layout.findViewById(R.id.text_deceased);
+        text_lastupdated = layout.findViewById(R.id.text_lastupdated);
+        parseFiguresData();
+        return layout;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -93,18 +102,41 @@ public class FiguresFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void parseFiguresData() {
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, constants.URL_JSON_OBJECT, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("statewise");
+                            for(int i = 0; i < response.getJSONArray("statewise").length(); i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if(jsonObject.getString("state").equals("Total")) {
+                                    text_confirmed.setText(jsonObject.getString("confirmed"));
+                                    text_active.setText(jsonObject.getString("active"));
+                                    text_recovered.setText(jsonObject.getString("recovered"));
+                                    text_deceased.setText(jsonObject.getString("deaths"));
+                                    text_lastupdated.setText("Last Updated "+" "+jsonObject.getString("lastupdatedtime"));
+                                }
+                            }
+                          //  Log.d(TAG, response.getJSONObject("state_wise").toString());
+                         } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest, constants.TAG_JSON_OBJECT);
     }
 }
