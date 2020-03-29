@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/stateholder"
+    android:background="?android:attr/selectableItemBackground"
+    android:paddingBottom="@dimen/row_padding_vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/row_padding_vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="6"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/state"
+        android:text="Karanataka"
+        android:layout_width="0dp"
+        android:textSize="13sp"
+        android:textColor="@color/colorSecondaryText"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.6"/>
+
+    <TextView
+        android:id="@+id/confirmed"
+        android:text="809"
+        android:textAlignment="center"
+        android:layout_width="0dp"
+        android:textSize="13sp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"/>
+
+    <TextView
+        android:id="@+id/active"
+        android:text="760"
+        android:textSize="13sp"
+        android:textAlignment="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"/>
+
+    <TextView
+        android:id="@+id/recovered"
+        android:text="60"
+        android:layout_width="0dp"
+        android:textSize="13sp"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"/>
+
+
+    <TextView
+        android:id="@+id/deceased"
+        android:text="40"
+        android:textSize="13sp"
+        android:layout_width="0dp"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"/>
+
+    </LinearLayout>
+</RelativeLayout>

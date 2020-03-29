@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">covid19app</string>
+    <string name="app_name">India Covid-19 Tracker</string>
+    <string name="title_stats">Latest Figures</string>
+    <string name="title_states">State/UT Cases</string>
+    <string name="title_tips">Tips</string>
+    <string name="text_update">Last Updated</string>
+    <string name="text_updates">Do not panic! Do not hoard.</string>
+    <string name="text_time_update">Last Updated</string>
+    <string name="text_confirmed">CONFIRMED</string>
+    <string name="text_active">ACTIVE</string>
+    <string name="text_recovered">RECOVERED</string>
+    <string name="text_deceased">DECEASED</string>
+    <string name="text_states_ut">STATES/UT</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
